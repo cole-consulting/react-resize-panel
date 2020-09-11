@@ -16,8 +16,9 @@ class ResizePanel extends React.Component {
     this.validateSize = debounce(this.validateSize, 100).bind(this);
   }
 
-  isHorizontal = () =>
+  isHorizontal() {
     this.props.direction === "w" || this.props.direction === "e";
+  }
 
   componentDidMount() {
     const content = this.contentRef.current;
@@ -54,7 +55,7 @@ class ResizePanel extends React.Component {
     if (this.state.size !== minSize) {
       this.setState({
         ...this.state,
-        size: minSize
+        size: minSize,
       });
     } else {
       // If our resizing has left the parent container's content overflowing
@@ -69,36 +70,36 @@ class ResizePanel extends React.Component {
           ...this.state,
           size: isHorizontal
             ? actualContent.clientWidth - overflow
-            : actualContent.clientHeight - overflow
+            : actualContent.clientHeight - overflow,
         });
       }
     }
   }
 
-  handleDrag = (e, ui) => {
+  handleDrag(e, ui) {
     const { direction } = this.props;
     const factor = direction === "e" || direction === "s" ? -1 : 1;
 
     // modify the size based on the drag delta
     let delta = this.isHorizontal() ? ui.deltaX : ui.deltaY;
     this.setState((s, p) => ({ size: Math.max(10, s.size - delta * factor) }));
-  };
+  }
 
-  handleDragEnd = (e, ui) => {
+  handleDragEnd(e, ui) {
     this.validateSize();
-  };
+  }
 
   render() {
     const dragHandlers = {
       onDrag: this.handleDrag,
-      onStop: this.handleDragEnd
+      onStop: this.handleDragEnd,
     };
     const { direction } = this.props;
     const isHorizontal = this.isHorizontal();
 
     let containerClass = cx({
       ContainerHorizontal: isHorizontal,
-      ContainerVertical: !isHorizontal
+      ContainerVertical: !isHorizontal,
     });
 
     if (this.props.containerClass) {
@@ -115,14 +116,14 @@ class ResizePanel extends React.Component {
       this.props.handleClass ||
       cx({
         ResizeHandleHorizontal: isHorizontal,
-        ResizeHandleVertical: !isHorizontal
+        ResizeHandleVertical: !isHorizontal,
       });
 
     let resizeBarClasses =
       this.props.borderClass ||
       cx({
         ResizeBarHorizontal: isHorizontal,
-        ResizeBarVertical: !isHorizontal
+        ResizeBarVertical: !isHorizontal,
       });
 
     let contentStyle = isHorizontal
@@ -130,7 +131,7 @@ class ResizePanel extends React.Component {
       : { height: this.state.size + "px" };
     let contentClassName = cx("ResizeContent", {
       ResizeContentHorizontal: isHorizontal,
-      ResizeContentVertical: !isHorizontal
+      ResizeContentVertical: !isHorizontal,
     });
 
     let content = [
@@ -141,7 +142,7 @@ class ResizePanel extends React.Component {
         style={contentStyle}
       >
         {React.Children.only(this.props.children)}
-      </div>
+      </div>,
     ];
 
     let handle = (
