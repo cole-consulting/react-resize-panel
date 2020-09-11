@@ -14,6 +14,8 @@ class ResizePanel extends React.Component {
     this.contentRef = React.createRef();
     this.wrapperRef = React.createRef();
     this.validateSize = debounce(this.validateSize, 100).bind(this);
+    this.handleDrag = this.handleDrag.bind(this);
+    this.handleDragEnd = this.handleDragEnd.bind(this);
   }
 
   isHorizontal() {

@@ -4573,6 +4573,8 @@ var ResizePanel = /*#__PURE__*/function (_React$Component) {
     _this.contentRef = /*#__PURE__*/React.createRef();
     _this.wrapperRef = /*#__PURE__*/React.createRef();
     _this.validateSize = lodash_debounce(_this.validateSize, 100).bind(_assertThisInitialized(_this));
+    _this.handleDrag = _this.handleDrag.bind(_assertThisInitialized(_this));
+    _this.handleDragEnd = _this.handleDragEnd.bind(_assertThisInitialized(_this));
     return _this;
   }
 
