@@ -4629,6 +4629,8 @@ var ResizePanel = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleDrag",
     value: function handleDrag(e, ui) {
+      var _this$props;
+
       var direction = this.props.direction;
       var factor = direction === "e" || direction === "s" ? -1 : 1; // modify the size based on the drag delta
 
@@ -4638,11 +4640,15 @@ var ResizePanel = /*#__PURE__*/function (_React$Component) {
           size: Math.max(10, s.size - delta * factor)
         };
       });
+      this.props.onDrag && ((_this$props = this.props) === null || _this$props === void 0 ? void 0 : _this$props.onDrag());
     }
   }, {
     key: "handleDragEnd",
     value: function handleDragEnd(e, ui) {
+      var _this$props2;
+
       this.validateSize();
+      this.props.onStop && ((_this$props2 = this.props) === null || _this$props2 === void 0 ? void 0 : _this$props2.onStop());
     }
   }, {
     key: "render",
